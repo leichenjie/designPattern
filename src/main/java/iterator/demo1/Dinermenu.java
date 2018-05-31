@@ -1,0 +1,31 @@
+package iterator.demo1;
+
+import java.util.Iterator;
+
+public class Dinermenu {
+    static final int MAX_ITEMS = 4;
+    int numberOfItems = 0;
+    MenuItem[] menuItems;
+
+    public Dinermenu() {
+        menuItems = new MenuItem[MAX_ITEMS];
+        addItem("Vegetarian BLT","(Fakin') Bacon with lettce & tomato on whole wheat",true,2.99);
+        addItem("BLT","Bacon with lettuce & tomato on whole wheat",true,2.99);
+        addItem("Soup of the day","Soup of  ehr day,with a side of photo salad",false,3.29);
+        addItem("Hotdag","A hot dog,with saurkraut,relish,onions,topped with cheese",false,3.05);
+    }
+
+    public void addItem(String name,String description,boolean vegetarian,double price) {
+        MenuItem menuItem = new MenuItem(name, description, vegetarian, price);
+        if(numberOfItems >= MAX_ITEMS) {
+            System.err.println("Sorry,menu is full!Can't add item to menu");
+        }else {
+            menuItems[numberOfItems] = menuItem;
+            numberOfItems++;
+        }
+    }
+
+    public Iterator createIterator() {
+        return new DinnerMenuIterator(menuItems);
+    }
+}
